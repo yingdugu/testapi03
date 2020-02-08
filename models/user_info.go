@@ -10,16 +10,16 @@ import (
 )
 
 type UserInfo struct {
-	Id              int     `orm:"column(id);pk"`
+	Id              int     `orm:"column(id);size(100);"`
 	Name            string  `orm:"column(name);size(100);null"`
 	Gender          string  `orm:"column(gender);size(10);null"`
 	Phone           string  `orm:"column(phone);size(100);null"`
 	Place           string  `orm:"column(place);size(100);null"`
 	Idimage         string  `orm:"column(idimage);size(255);null"`
-	Currfunds       int     `orm:"column(currfunds);null"`
+	Currfunds       float32 `orm:"column(currfunds);null"`
 	Ishunter        int     `orm:"column(ishunter);null"`
 	Expectposition  string  `orm:"column(expectposition);size(100);null"`
-	IdentifyNum     string  `orm:"column(identify_num);size(100);null"`
+	IdentifyNum     string  `orm:"column(identifyNum);pk"`
 	ReaderReward    float32 `orm:"column(reader_reward);null"`
 	TrainsmitReward float32 `orm:"column(trainsmit_reward);null"`
 	InterviewReward float32 `orm:"column(interview_reward);null"`
@@ -45,9 +45,9 @@ func AddUserInfo(m *UserInfo) (id int64, err error) {
 
 // GetUserInfoById retrieves UserInfo by Id. Returns error if
 // Id doesn't exist
-func GetUserInfoById(id int) (v *UserInfo, err error) {
+func GetUserInfoById(identifyNum string) (v *UserInfo, err error) {
 	o := orm.NewOrm()
-	v = &UserInfo{Id: id}
+	v = &UserInfo{IdentifyNum: identifyNum}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
@@ -134,9 +134,9 @@ func GetAllUserInfo(query map[string]string, fields []string, sortby []string, o
 
 // UpdateUserInfo updates UserInfo by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateUserInfoById(m *UserInfo) (err error) {
+func UpdateUserInfoByNum(m *UserInfo) (err error) {
 	o := orm.NewOrm()
-	v := UserInfo{Id: m.Id}
+	v := UserInfo{IdentifyNum: m.IdentifyNum}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -149,13 +149,13 @@ func UpdateUserInfoById(m *UserInfo) (err error) {
 
 // DeleteUserInfo deletes UserInfo by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteUserInfo(id int) (err error) {
+func DeleteUserInfo(identifyNum string) (err error) {
 	o := orm.NewOrm()
-	v := UserInfo{Id: id}
+	v := UserInfo{IdentifyNum: identifyNum}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&UserInfo{Id: id}); err == nil {
+		if num, err = o.Delete(&UserInfo{IdentifyNum: identifyNum}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

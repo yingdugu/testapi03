@@ -13,32 +13,44 @@ import (
 	"github.com/astaxie/beego"
 )
 
+//func init() {
+//	ns := beego.NewNamespace("/v1",
+//
+//		beego.NSNamespace("/conn_info",
+//			beego.NSInclude(
+//				&controllers.ConnInfoController{},
+//			),
+//		),
+//
+//		beego.NSNamespace("/job_info",
+//			beego.NSInclude(
+//				&controllers.JobInfoController{},
+//			),
+//		),
+//
+//		beego.NSNamespace("/project_image",
+//			beego.NSInclude(
+//				&controllers.ProjectImageController{},
+//			),
+//		),
+//
+//		beego.NSNamespace("/user_info",
+//			beego.NSInclude(
+//				&controllers.UserInfoController{},
+//			),
+//		),
+//	)
+//	beego.AddNamespace(ns)
+//}
+
 func init() {
-	ns := beego.NewNamespace("/v1",
+	//beego.Router("/ConnInfoController", &controllers.ConnInfoController{}, )
+	//beego.Router("/JobInfoController", &controllers.JobInfoController{}, )
+	//beego.Router("/ProjectImageController", &controllers.ProjectImageController{},"post:Upload" )
+	//beego.Router("/UserInfoController", &controllers.UserInfoController{}, )
 
-		beego.NSNamespace("/conn_info",
-			beego.NSInclude(
-				&controllers.ConnInfoController{},
-			),
-		),
-
-		beego.NSNamespace("/job_info",
-			beego.NSInclude(
-				&controllers.JobInfoController{},
-			),
-		),
-
-		beego.NSNamespace("/project_image",
-			beego.NSInclude(
-				&controllers.ProjectImageController{},
-			),
-		),
-
-		beego.NSNamespace("/user_info",
-			beego.NSInclude(
-				&controllers.UserInfoController{},
-			),
-		),
-	)
-	beego.AddNamespace(ns)
+	beego.AutoRouter(&controllers.ConnInfoController{})
+	beego.AutoRouter(&controllers.JobInfoController{})
+	beego.AutoRouter(&controllers.ProjectImageController{})
+	beego.AutoRouter(&controllers.UserInfoController{})
 }

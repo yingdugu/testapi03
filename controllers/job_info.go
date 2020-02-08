@@ -3,7 +3,6 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
-	"strconv"
 	"strings"
 	"testapi03/models"
 
@@ -54,9 +53,10 @@ func (c *JobInfoController) Post() {
 // @Failure 403 :id is empty
 // @router /:id [get]
 func (c *JobInfoController) GetOne() {
-	idStr := c.Ctx.Input.Param(":id")
-	id, _ := strconv.Atoi(idStr)
-	v, err := models.GetJobInfoById(id)
+	//idStr := c.Ctx.Input.Param(":id")
+	idStr := c.GetString("jobname")
+	//id, _ := strconv.Atoi(idStr)
+	v, err := models.GetJobInfoByName(idStr)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
@@ -137,11 +137,12 @@ func (c *JobInfoController) GetAll() {
 // @Failure 403 :id is not int
 // @router /:id [put]
 func (c *JobInfoController) Put() {
-	idStr := c.Ctx.Input.Param(":id")
-	id, _ := strconv.Atoi(idStr)
-	v := models.JobInfo{Id: id}
+	//idStr := c.Ctx.Input.Param(":id")
+	idStr := c.GetString("jobname")
+	//id, _ := strconv.Atoi(idStr)
+	v := models.JobInfo{Jobname: idStr}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if err := models.UpdateJobInfoById(&v); err == nil {
+		if err := models.UpdateJobInfoByName(&v); err == nil {
 			c.Data["json"] = "OK"
 		} else {
 			c.Data["json"] = err.Error()
@@ -160,9 +161,10 @@ func (c *JobInfoController) Put() {
 // @Failure 403 id is empty
 // @router /:id [delete]
 func (c *JobInfoController) Delete() {
-	idStr := c.Ctx.Input.Param(":id")
-	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteJobInfo(id); err == nil {
+	idStr := c.GetString("jobname")
+	//idStr := c.Ctx.Input.Param(":id")
+	//id, _ := strconv.Atoi(idStr)
+	if err := models.DeleteJobInfo(idStr); err == nil {
 		c.Data["json"] = "OK"
 	} else {
 		c.Data["json"] = err.Error()

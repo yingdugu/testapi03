@@ -10,21 +10,21 @@ import (
 )
 
 type JobInfo struct {
-	Id           int    `orm:"column(id);pk"`
-	Jobname      string `orm:"column(jobname);size(100);null"`
-	Jobkind      string `orm:"column(jobkind);size(100);null"`
-	Objectregin  string `orm:"column(objectregin);size(100);null"`
-	Currstate    string `orm:"column(currstate);size(100);null"`
-	Timedate     string `orm:"column(timedate);size(100);null"`
-	Readcut      int    `orm:"column(readcut);null"`
-	Sharecut     int    `orm:"column(sharecut);null"`
-	Imagepath    string `orm:"column(imagepath);size(100);null"`
-	Username     string `orm:"column(username);size(100);null"`
-	Jobdetail    string `orm:"column(jobdetail);size(100);null"`
-	Salarydetail string `orm:"column(salarydetail);size(100);null"`
-	Additioninfo string `orm:"column(additioninfo);size(100);null"`
-	Currcut      int    `orm:"column(currcut);null"`
-	Allcut       int    `orm:"column(allcut);null"`
+	Id           int     `orm:"column(id);size(11);"`
+	Jobname      string  `orm:"column(jobname);pk"`
+	Jobkind      string  `orm:"column(jobkind);size(100);null"`
+	Objectregin  string  `orm:"column(objectregin);size(100);null"`
+	Currstate    string  `orm:"column(currstate);size(100);null"`
+	Timedate     string  `orm:"column(timedate);size(100);null"`
+	Readcut      float32 `orm:"column(readcut);null"`
+	Sharecut     float32 `orm:"column(sharecut);null"`
+	Imagepath    string  `orm:"column(imagepath);size(100);null"`
+	Username     string  `orm:"column(username);size(100);null"`
+	Jobdetail    string  `orm:"column(jobdetail);size(100);null"`
+	Salarydetail string  `orm:"column(salarydetail);size(100);null"`
+	Additioninfo string  `orm:"column(additioninfo);size(100);null"`
+	Currcut      float32 `orm:"column(currcut);null"`
+	Allcut       float32 `orm:"column(allcut);null"`
 }
 
 func (t *JobInfo) TableName() string {
@@ -45,9 +45,9 @@ func AddJobInfo(m *JobInfo) (id int64, err error) {
 
 // GetJobInfoById retrieves JobInfo by Id. Returns error if
 // Id doesn't exist
-func GetJobInfoById(id int) (v *JobInfo, err error) {
+func GetJobInfoByName(jobname string) (v *JobInfo, err error) {
 	o := orm.NewOrm()
-	v = &JobInfo{Id: id}
+	v = &JobInfo{Jobname: jobname}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
@@ -134,9 +134,9 @@ func GetAllJobInfo(query map[string]string, fields []string, sortby []string, or
 
 // UpdateJobInfo updates JobInfo by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateJobInfoById(m *JobInfo) (err error) {
+func UpdateJobInfoByName(m *JobInfo) (err error) {
 	o := orm.NewOrm()
-	v := JobInfo{Id: m.Id}
+	v := JobInfo{Jobname: m.Jobname}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -149,13 +149,13 @@ func UpdateJobInfoById(m *JobInfo) (err error) {
 
 // DeleteJobInfo deletes JobInfo by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteJobInfo(id int) (err error) {
+func DeleteJobInfo(jobname string) (err error) {
 	o := orm.NewOrm()
-	v := JobInfo{Id: id}
+	v := JobInfo{Jobname: jobname}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&JobInfo{Id: id}); err == nil {
+		if num, err = o.Delete(&JobInfo{Jobname: jobname}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

@@ -8,7 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"strconv"
+	"io/ioutil"
 	"strings"
 	"testapi03/models"
 
@@ -61,9 +61,11 @@ func (c *ProjectImageController) Post() {
 // @Failure 403 :id is empty
 // @router /:id [get]
 func (c *ProjectImageController) GetOne() {
-	idStr := c.Ctx.Input.Param(":id")
-	id, _ := strconv.Atoi(idStr)
-	v, err := models.GetProjectImageById(id)
+	//idStr := c.Ctx.Input.Param(":id")
+	idStr := c.GetString("name")
+	//id, _ := strconv.Atoi(idStr)
+	name := idStr
+	v, err := models.GetProjectImageByName(name)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
@@ -144,8 +146,10 @@ func (c *ProjectImageController) GetAll() {
 // @Failure 403 :id is not int
 // @router /:id [put]
 func (c *ProjectImageController) Put() {
-	idStr := c.Ctx.Input.Param(":id")
-	id, _ := strconv.Atoi(idStr)
+	//idStr := c.Ctx.Input.Param(":id")
+	idStr := c.GetString("name")
+	//id, _ := strconv.Atoi(idStr)
+	id := idStr
 	v := models.ProjectImage{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if err := models.UpdateProjectImageById(&v); err == nil {
@@ -167,8 +171,10 @@ func (c *ProjectImageController) Put() {
 // @Failure 403 id is empty
 // @router /:id [delete]
 func (c *ProjectImageController) Delete() {
-	idStr := c.Ctx.Input.Param(":id")
-	id, _ := strconv.Atoi(idStr)
+	//idStr := c.Ctx.Input.Param(":id")
+	idStr := c.GetString("name")
+	//id, _ := strconv.Atoi(idStr)
+	id := idStr
 	if err := models.DeleteProjectImage(id); err == nil {
 		c.Data["json"] = "OK"
 	} else {
@@ -184,64 +190,78 @@ func (c *ProjectImageController) Delete() {
 // @Success 200 {string} Upload success!
 // @Failure 403 id is empty
 // @router / :id [post]
-func (c *ProjectImageController) Upload()  {
+func (c *ProjectImageController) Upload() {
 	fmt.Println("Hello, World!")
 	f, h, err := c.GetFile("image")
-	result := make(map[string] interface{})
+	result := make(map[string]interface{})
 	img := ""
+	id := UniqueId()
+	exStrArr := strings.Split(h.Filename, ".")
+	nameStr := exStrArr[len(exStrArr)-2]
 	if err == nil {
-		exStrArr := strings.Split(h.Filename, ".")
 		exStr := strings.ToLower(exStrArr[len(exStrArr)-1])
-		if exStr != "jpg" && exStr!="png" && exStr != "gif" {
+		if exStr != "jpg" && exStr != "png" && exStr != "gif" {
 			result["code"] = 1
 			result["message"] = "上传只能.jpg 或者png格式"
 		}
-		img = "/static/upload/" + UniqueId()+"."+exStr;
-		c.SaveToFile("upFilename", img) // 保存位置在 static/upload, 没有文件夹要先创建
+		img = "static/upload/" + id + "." + exStr
+		c.SaveToFile("image", img) // 保存位置在 static/upload, 没有文件夹要先创建
 		result["code"] = 0
-		result["message"] =img
-	}else{
+		result["message"] = img
+	} else {
 		result["code"] = 2
-		result["message"] = "上传异常"+err.Error()
+		result["message"] = "上传异常" + err.Error()
 	}
 	//defer f.Close()
-	c.Data["json"] = result
-
-	id := UniqueId()
+	//c.Data["json"] = result
 	// 定义数据库地址数据存储
 	data := models.ProjectImage{}
-	data.Id, _ = strconv.Atoi(id)
+	data.Name = nameStr
+	data.Id = id
 	data.Imagepath = img
 	data.ImageUrl = c.GetUrl(id)
+	fmt.Println(data)
 
+	fmt.Println("图片读取成功")
 	// 将数据保存在数据库中
-	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &data); err == nil {
-		if _, err := models.AddProjectImage(&data); err == nil {
-			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = data
-		} else {
-			c.Data["json"] = err.Error()
-		}
+	if _, err := models.AddProjectImage(&data); err == nil {
+		c.Ctx.Output.SetStatus(201)
+		c.Data["json"] = data
 	} else {
 		c.Data["json"] = err.Error()
 	}
 	defer f.Close()
+	c.Data["json"] = result
 	c.ServeJSON()
 }
 
-// 通过url找到图片存储地址下载图片
-func (c *ProjectImageController) Getimage()  {
-	idStr := c.Ctx.Input.Param(":id")
-	imageurl, _ := strconv.Atoi(idStr)
-	v, err := models.GetProjectImageById(imageurl)
+// 通过图片名称找到图片并下载
+func (c *ProjectImageController) Getimage() {
+	fmt.Println("方法已经调用")
+	//idStr := c.Ctx.Input.Param("name")
+	idStr := c.GetString("name")
+	//imageurl, _ := strconv.Atoi(idStr)
+	name := idStr
+	fmt.Println(name)
+	v, err := models.GetProjectImageByName(name)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
 		c.Data["json"] = v
 	}
 	//通过url获取图片
+	fmt.Println("运行到这里")
+	//c.Ctx.Output.Download("static/upload/04b4926d2b63758d6dfa66a09bc0f6eb.jpg", "04b4926d2b63758d6dfa66a09bc0f6eb.jpg")
 	imagepath := v.Imagepath
-	c.Ctx.Output.Download(imagepath)
+	imageid := v.Id
+	imagepathArr := strings.Split(imagepath, ".")
+	fmt.Println(imageid + "." + strings.ToLower(imagepathArr[len(imagepathArr)-1]))
+	imagename := "static/upload/" + imageid + "." + strings.ToLower(imagepathArr[len(imagepathArr)-1])
+	//c.Ctx.Output.Download(imagepath, imageid + "." + strings.ToLower(imagepathArr[len(imagepathArr)-1]))
+	c.Ctx.Output.Header("Content-Type", "image"+"/"+strings.ToLower(imagepathArr[len(imagepathArr)-1]))
+	c.Ctx.Output.Header("Content-Disposition", fmt.Sprintf("inline; filename=\"%s\"", imagename))
+	file, err := ioutil.ReadFile(imagename)
+	c.Ctx.WriteString(string(file))
 	c.ServeJSON()
 }
 
@@ -254,8 +274,8 @@ func (c *ProjectImageController) GetUrl(s string) (url string) {
 	port := "8082"
 	var str strings.Builder
 	str.WriteString("http://")
-	str.WriteString(ip)
-	str.WriteString(port)
+	str.WriteString(ip + ":")
+	str.WriteString(port + "/")
 	str.WriteString(s)
 	url = str.String()
 	return
@@ -263,10 +283,11 @@ func (c *ProjectImageController) GetUrl(s string) (url string) {
 
 func Md5(str string) string {
 	hash := md5.New()
-	hash.Write([]byte(str) )
+	hash.Write([]byte(str))
 	return fmt.Sprintf("%x", hash.Sum(nil))
 }
 
+// 自动生成id号码
 func UniqueId() string {
 	b := make([]byte, 48)
 

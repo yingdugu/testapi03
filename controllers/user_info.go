@@ -3,7 +3,6 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
-	"strconv"
 	"strings"
 	"testapi03/models"
 
@@ -54,9 +53,10 @@ func (c *UserInfoController) Post() {
 // @Failure 403 :id is empty
 // @router /:id [get]
 func (c *UserInfoController) GetOne() {
-	idStr := c.Ctx.Input.Param(":id")
-	id, _ := strconv.Atoi(idStr)
-	v, err := models.GetUserInfoById(id)
+	//idStr := c.Ctx.Input.Param(":id")
+	idStr := c.GetString("identifyNum")
+	//id, _ := strconv.Atoi(idStr)
+	v, err := models.GetUserInfoById(idStr)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
@@ -137,11 +137,12 @@ func (c *UserInfoController) GetAll() {
 // @Failure 403 :id is not int
 // @router /:id [put]
 func (c *UserInfoController) Put() {
-	idStr := c.Ctx.Input.Param(":id")
-	id, _ := strconv.Atoi(idStr)
-	v := models.UserInfo{Id: id}
+	//idStr := c.Ctx.Input.Param(":id")
+	idStr := c.GetString("identifyNum")
+	//id, _ := strconv.Atoi(idStr)
+	v := models.UserInfo{IdentifyNum: idStr}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if err := models.UpdateUserInfoById(&v); err == nil {
+		if err := models.UpdateUserInfoByNum(&v); err == nil {
 			c.Data["json"] = "OK"
 		} else {
 			c.Data["json"] = err.Error()
@@ -160,9 +161,10 @@ func (c *UserInfoController) Put() {
 // @Failure 403 id is empty
 // @router /:id [delete]
 func (c *UserInfoController) Delete() {
-	idStr := c.Ctx.Input.Param(":id")
-	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteUserInfo(id); err == nil {
+	//idStr := c.Ctx.Input.Param(":id")
+	idStr := c.GetString("identifyNum")
+	//id, _ := strconv.Atoi(idStr)
+	if err := models.DeleteUserInfo(idStr); err == nil {
 		c.Data["json"] = "OK"
 	} else {
 		c.Data["json"] = err.Error()

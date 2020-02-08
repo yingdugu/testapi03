@@ -10,7 +10,8 @@ import (
 )
 
 type ProjectImage struct {
-	Id        int    `orm:"column(id);pk"`
+	Id        string `orm:"column(id);size(255);null"`
+	Name      string `orm:"column(name);pk"`
 	Imagepath string `orm:"column(imagepath);size(255);null"`
 	ImageUrl  string `orm:"column(image_url);size(255);null"`
 }
@@ -33,9 +34,9 @@ func AddProjectImage(m *ProjectImage) (id int64, err error) {
 
 // GetProjectImageById retrieves ProjectImage by Id. Returns error if
 // Id doesn't exist
-func GetProjectImageById(id int) (v *ProjectImage, err error) {
+func GetProjectImageByName(name string) (v *ProjectImage, err error) {
 	o := orm.NewOrm()
-	v = &ProjectImage{Id: id}
+	v = &ProjectImage{Name: name}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
@@ -137,7 +138,7 @@ func UpdateProjectImageById(m *ProjectImage) (err error) {
 
 // DeleteProjectImage deletes ProjectImage by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteProjectImage(id int) (err error) {
+func DeleteProjectImage(id string) (err error) {
 	o := orm.NewOrm()
 	v := ProjectImage{Id: id}
 	// ascertain id exists in the database

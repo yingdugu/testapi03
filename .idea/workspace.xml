@@ -1,25 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ec01f409-be1a-413c-9e20-c99c60ef7370" name="Default Changelist" comment="" />
+    <list default="true" id="ec01f409-be1a-413c-9e20-c99c60ef7370" name="Default Changelist" comment="20200202">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/app.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/app.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/job_info.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/job_info.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/project_image.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/project_image.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/user_info.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/user_info.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lastupdate.tmp" beforeDir="false" afterPath="$PROJECT_DIR$/lastupdate.tmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/job_info.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/job_info.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/project_image.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/project_image.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/user_info.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/user_info.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/router.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="GOROOT" path="C:\Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1XILb0XX7qa6ja1220iJLf3EyNF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="GO_FMT" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
@@ -52,6 +70,10 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="20200202" />
+    <option name="LAST_COMMIT_MESSAGE" value="20200202" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="408" y="167" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1580738587409">
       <screen x="0" y="0" width="1366" height="728" />
@@ -61,38 +83,78 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="391" y="0" key="#go_build_commentsRouter_.go/0.0.1366.728@0.0.1366.728" timestamp="1580735650513" />
-    <state width="1306" height="123" key="GridCell.Tab.0.bottom" timestamp="1580741366814">
+    <state x="283" y="0" key="CommitChangelistDialog2" timestamp="1581149029514">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="123" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580741366814" />
-    <state width="1306" height="123" key="GridCell.Tab.0.center" timestamp="1580741366814">
+    <state x="283" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1581149029514" />
+    <state x="100" y="101" width="1166" height="528" key="DiffContextDialog" timestamp="1581148126992">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="123" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1580741366814" />
-    <state width="1306" height="123" key="GridCell.Tab.0.left" timestamp="1580741366814">
+    <state x="100" y="101" width="1166" height="528" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1581148126992" />
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1580805021060">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="123" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1580741366814" />
-    <state width="1306" height="123" key="GridCell.Tab.0.right" timestamp="1580741366814">
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1580805021060" />
+    <state x="504" y="277" width="382" height="174" key="Github.CreateGistDialog" timestamp="1581001722405">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="123" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1580741366814" />
-    <state width="1306" height="123" key="GridCell.Tab.1.bottom" timestamp="1580741366814">
+    <state x="504" y="277" width="382" height="174" key="Github.CreateGistDialog/0.0.1366.728@0.0.1366.728" timestamp="1581001722405" />
+    <state x="554" y="255" width="273" height="219" key="Github.ShareDialog" timestamp="1581148640323">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="123" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580741366814" />
-    <state width="1306" height="123" key="GridCell.Tab.1.center" timestamp="1580741366814">
+    <state x="554" y="255" width="273" height="219" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1581148640323" />
+    <state width="1320" height="113" key="GridCell.Tab.0.bottom" timestamp="1581095865419">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="123" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1580741366814" />
-    <state width="1306" height="123" key="GridCell.Tab.1.left" timestamp="1580741366814">
+    <state width="1320" height="113" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1581095865419" />
+    <state width="1320" height="113" key="GridCell.Tab.0.center" timestamp="1581095865419">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="123" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1580741366814" />
-    <state width="1306" height="123" key="GridCell.Tab.1.right" timestamp="1580741366814">
+    <state width="1320" height="113" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1581095865419" />
+    <state width="1320" height="113" key="GridCell.Tab.0.left" timestamp="1581095865418">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="123" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1580741366814" />
+    <state width="1320" height="113" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1581095865418" />
+    <state width="1320" height="113" key="GridCell.Tab.0.right" timestamp="1581095865419">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1320" height="113" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1581095865419" />
+    <state width="1306" height="328" key="GridCell.Tab.1.bottom" timestamp="1580817306596">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1306" height="328" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580817306596" />
+    <state width="1306" height="328" key="GridCell.Tab.1.center" timestamp="1580817306596">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1306" height="328" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1580817306596" />
+    <state width="1306" height="328" key="GridCell.Tab.1.left" timestamp="1580817306596">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1306" height="328" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1580817306596" />
+    <state width="1306" height="328" key="GridCell.Tab.1.right" timestamp="1580817306596">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1306" height="328" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1580817306596" />
+    <state x="184" y="6" key="SettingsEditor" timestamp="1581001468373">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1581001468373" />
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1581148459657">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1581148459657" />
+    <state x="418" y="99" key="VcsDiffUtil.ChangesDialog" timestamp="1581148117407">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="418" y="99" key="VcsDiffUtil.ChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1581148117407" />
+    <state x="234" y="100" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1580794562082">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="234" y="100" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1580794562082" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1580793554631">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1580793554631" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
